@@ -12,7 +12,7 @@ class CreateEntityCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:cec {model} {folder} {type?}';
+    protected $signature = 'make:cec {model} {folder?} {type?}';
 
     /**
      * The console command description.
@@ -34,14 +34,16 @@ class CreateEntityCommand extends Command
             "--factory" => true
         ]);
 
-        $migration = Helpers::helper_command_migration($this->argument("type"), $this->argument("folder"));
+        $folder = $this->argument("folder") ?: $this->argument("model");
+        $migration = Helpers::helper_command_migration($this->argument("type"), $folder);
+
 
         $this->call("make:migration", [
             "name" => $migration["name"],
             "--path" => '/database/migrations/' . ucfirst($migration["folder"]),
         ]);
 
-        $this->info("Creación exitosa!");
+        $this->info("El entorno ha sido creado con éxito!");
 
         return 0;
     }
