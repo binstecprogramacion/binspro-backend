@@ -26,7 +26,7 @@ class CreateMigrationFolderCommand extends Command
      */
     public function handle()
     {
-        $migration = Helpers::helper_command_migration($this->argument("type"), $this->argument("folder"));
+        $migration = Helpers::helper_command_migration($this->argument("type"), $this->argument("folder"), $this->argument("migration"));
 
         $this->call("make:migration", [
             "name" => $migration["name"] ,

@@ -28,7 +28,7 @@ class Helpers {
         $table->comment($comment);
     }
 
-    public static function helper_command_migration($argumentType, $argumentFolder) {
+    public static function helper_command_migration($argumentType, $argumentFolder, $param = null) {
         $folder = explode("_", $argumentFolder);
         $migration = $argumentFolder;
 
@@ -37,13 +37,13 @@ class Helpers {
         if($argumentType) {
             switch ($argumentType) {
                 case 'add':
-                    $nameType = "add_name_column_to";
+                    $nameType = "add_".$param."_to";
                     break;
                 case 'remove':
-                    $nameType = "remove_name_column_from";
+                    $nameType = "remove_".$param."_from";
                     break;
                 case 'change':
-                    $nameType = "change_name_column_type_in";
+                    $nameType = "change_".$param."_type_in";
                     break;
                 default:
                     $nameType = $argumentType;
