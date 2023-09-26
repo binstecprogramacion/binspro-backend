@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\menus;
+use App\Models\Permissions;
 use Illuminate\Http\Request;
 
-class MenusController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $menus = menus::with('children')->where("parent_id", "=", 0)->orderBy('id')->get();
-        return response()->json($menus, 200);
+        //
     }
 
     /**
@@ -27,7 +26,7 @@ class MenusController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(menus $menus)
+    public function show(Permissions $permission)
     {
         //
     }
@@ -35,7 +34,7 @@ class MenusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, menus $menus)
+    public function update(Request $request, Permissions $permission)
     {
         //
     }
@@ -43,7 +42,7 @@ class MenusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(menus $menus)
+    public function destroy(Permissions $permission)
     {
         //
     }

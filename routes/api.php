@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MenusController;
+use App\Http\Controllers\RolesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('menus', [MenusController::class, "index"]);
+Route::get('roles', [RolesController::class, "index"]);
 

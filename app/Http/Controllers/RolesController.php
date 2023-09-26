@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\menus;
+use App\Models\Roles;
 use Illuminate\Http\Request;
 
-class MenusController extends Controller
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $menus = menus::with('children')->where("parent_id", "=", 0)->orderBy('id')->get();
-        return response()->json($menus, 200);
+        $roles = Roles::find(1)::with("permissions")->get();
+
+        return response()->json($roles, 200);
     }
 
     /**
@@ -27,7 +28,7 @@ class MenusController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(menus $menus)
+    public function show(string $id)
     {
         //
     }
@@ -35,7 +36,7 @@ class MenusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, menus $menus)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -43,7 +44,7 @@ class MenusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(menus $menus)
+    public function destroy(string $id)
     {
         //
     }

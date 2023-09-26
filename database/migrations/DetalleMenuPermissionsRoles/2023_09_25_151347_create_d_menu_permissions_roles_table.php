@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
 
             Helpers::helper_migration($table, [
-                ["menu_id", true, "menus"],
                 ["rol_id", true, "roles"],
+                ["menu_id", true, "menus"],
                 ["permission_id", true, "permissions"],
             ], "Entidad many to many de menu, permiso y rol");
         });
