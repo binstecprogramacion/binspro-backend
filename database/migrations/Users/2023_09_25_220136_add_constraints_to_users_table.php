@@ -12,22 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger("user_type_id");
+            $table->unsignedBigInteger("user_type_id")->nullable();
             $table->foreign("user_type_id")->references("id")->on("user_type");
 
-            $table->unsignedBigInteger("specialty_id");
+            $table->unsignedBigInteger("specialty_id")->nullable();
             $table->foreign("specialty_id")->references("id")->on("specialties");
 
-            $table->unsignedBigInteger("rol_id");
+            $table->unsignedBigInteger("rol_id")->nullable();
             $table->foreign("rol_id")->references("id")->on("roles");
 
-            $table->unsignedBigInteger("area_id");
+            $table->unsignedBigInteger("area_id")->nullable();
             $table->foreign("area_id")->references("id")->on("areas");
 
-            $table->unsignedBigInteger("user_information_id");
+            $table->unsignedBigInteger("user_information_id")->nullable();
             $table->foreign("user_information_id")->references("id")->on("user_information");
 
-            $table->unsignedBigInteger("supplier_id");
+            $table->unsignedBigInteger("supplier_id")->nullable();
             $table->foreign("supplier_id")->references("id")->on("suppliers");
         });
     }

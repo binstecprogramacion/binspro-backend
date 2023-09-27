@@ -3,7 +3,6 @@
 use Laravel\Sanctum\Sanctum;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Stateful Domains
@@ -62,6 +61,7 @@ return [
     'middleware' => [
         'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
+        'auth:sanctum'
     ],
 
 ];

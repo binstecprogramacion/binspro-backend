@@ -4,6 +4,7 @@ use App\Http\Controllers\MenusController;
 use App\Http\Controllers\RolesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\UserController as UserV1;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::apiResource('v1/posts', UserV1::class)
+//   ->only(['index', 'show'])
+//   ->middleware('auth:sanctum');
+
+Route::post('login', [
+  App\Http\Controllers\Api\V1\LoginController::class,
+  'login'
+]);
 
 Route::get('menus', [MenusController::class, "index"]);
 Route::get('roles', [RolesController::class, "index"]);

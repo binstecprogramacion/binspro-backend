@@ -22,28 +22,27 @@ class menus extends Model
     ];
 
     protected $hidden = [
+        "created_at",
+        "updated_at",
+        "deleted_at",
         "user_created",
         "user_updated",
         "user_deleted",
     ];
 
-    public function children()
-    {
+    public function children() {
         return $this->hasMany(menus::class, 'parent_id');
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Roles::class, 'd_menu_permissions_roles', 'menu_id', 'rol_id')
-            ->withPivot('permission_id')
-            ->withTimestamps();
+    public function permissions() {
+        return $this->belongsToMany(Permissions::class, 'd_menu_permissions_roles', 'menu_id', 'permission_id');
     }
 
-    public function permissions()
+    public function append($attributes)
     {
-        return $this->belongsToMany(Permissions::class, 'd_menu_permissions_roles', 'menu_id', 'permission_id')
-            ->withPivot('rol_id')
-            ->withTimestamps();
+        return array_merge($attributes, [
+            'name_menu' => $this->name_menu,
+            'permissions' => $this->permissions->pluck('name_permission')
+        ]);
     }
-
 }

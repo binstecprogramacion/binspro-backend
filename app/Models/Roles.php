@@ -14,28 +14,38 @@ class Roles extends Model
     ];
 
     protected $hidden = [
+        "created_at",
+        "updated_at",
+        "deleted_at",
         "user_created",
         "user_updated",
-        "user_deleted"
+        "user_deleted",
     ];
 
 
     public function menus()
     {
         return $this->belongsToMany(menus::class, 'd_menu_permissions_roles', 'rol_id', 'menu_id')
-                    ->using(Menu_permissions_roles::class)
-                    ->withTimestamps()
+                    // ->using(MenuPermissionRol::class)
+                    // ->withTimestamps()
                     ->distinct();
     }
 
-    public function permissions()
+    public function withPermissions()
     {
-        return $this->belongsToMany(Permissions::class, 'd_menu_permissions_roles', 'rol_id', 'permission_id')
-            ->using(Menu_permissions_roles::class)
-            ->withPivot('menu_id')
-            ->withTimestamps()
-            ->as("permissions_menus")
-            ->distinct();
+        return $this->with(['menus' => function ($query) {
+            $query->with('permissions');
+        }]);
     }
+
+
+    // public function permissions()
+    // {
+    //     return $this->belongsToMany(Permissions::class, 'd_menu_permissions_roles', 'rol_id', 'permission_id')
+    //         ->withPivot('menu_id')
+    //         ->withTimestamps()
+    //         ->as("permissions_menus")
+    //         ->distinct();
+    // }
 
 }

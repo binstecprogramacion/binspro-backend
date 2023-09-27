@@ -1,28 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Roles;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\UserCollection;
+use App\Http\Resources\V1\UserResource;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
-class RolesController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roles = Roles::find(1);
-
-        // foreach ($roles->menus as $menu) {
-        //     $permissions = $menu->pivot->permissions();
-
-        //     $menu["permissions"] = $permissions;
-
-        //     unset($menu["pivot"]);
-        // }
-
-        return response()->json($roles->withPermissions()->get(), 200);
+        return new UserCollection(Users::latest()->paginate());
     }
 
     /**
@@ -36,9 +29,9 @@ class RolesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Users $user)
     {
-        //
+        return new UserResource($user);
     }
 
     /**
