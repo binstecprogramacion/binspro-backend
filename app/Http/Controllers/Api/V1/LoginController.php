@@ -16,9 +16,13 @@ class LoginController extends Controller
             ], 401);
         }
 
+        // $request->session()->regenerate();
+
+        $token = $request->user()->createToken($request->device);
+
         return response()->json([
-            'token' => $request->user()->createToken($request->device)->plainTextToken,
-            'message' => 'Success'
+            'token' => $token,
+            'message' => 'Success',
         ]);
     }
 
